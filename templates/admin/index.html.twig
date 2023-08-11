@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}véhicule{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-4">Nos véhicules</h1>
+    <div class="container text-center px-4">
+        <section class="row gx-4 gy-3">
+            {# ! for valeur in (objet ou tableau) #}
+            {% for v in fichier %}
+            <div class="col-md-3">
+                <div class="card border-primary">
+                    <div class="card-header">{{ v.titre }}</div>
+                    <div class="card-body text-center">
+                        <img class="img-fluid" src="{{ v.photo }}" alt="">
+                       
+                        {# * le filtre raw permet d'interprété les balises HTML #}
+                        {{ v.description|slice(0, 100) }}
+                       
+                        <div class="text-center">
+                        
+                        <a href="{{ path('app_voir', {id:v.id} )}}" class="btn btn-primary" >voir plus</a>
+                        
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+{% endblock %}

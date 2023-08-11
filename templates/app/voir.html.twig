@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}véhicule n°{{ voir.id }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card border-primary mb-3">
+        <div class="card-header"><img class="img-fluid" src="{{voir.marque }}" alt=""></div>
+        <div class="card-body">
+            <h4 class="card-title text-center">{{ voir.modele }}</h4>
+            {{ voir.description|raw }}
+            <p>{{  voir.dateEnregistrement|date('d/m/Y à H:i:s') }}</p>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.1/solar/bootstrap.min.css" integrity="sha512-s9Ht4rtwoi7rgXACIvyY/lqWpeZbiTF/yGi0ap+FUxvvxX9lzLmpgCn7VsPfmw+30rqmShau8qyKHy8vVHOdZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('app_app') }}">Lux'auto</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ path('app_app') }}">accueil
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('admin_accueil')}}">Nos véhicules</a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">BackOffice</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('admin_accueil')}}">Accueil</a>
+            <a class="dropdown-item" href="{{ path('blog_ajout')}}">Formulaire</a>
+            <a class="dropdown-item" href="{{ path('fichier')}}"> Gestion des véhicules </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+      {% if is_granted('ROLE_ADMIN') %}
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">BackOffice</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('blog_ajout') }}">Ajouter un article</a>
+            <a class="dropdown-item" href="{{ path('blog_gestion') }}">Gestion des articles</a>
+            <a class="dropdown-item" href="{{ path('voiture_ajout') }}">Ajouter une voiture</a>
+          </div>
+        </li>
+        {% endif %}
+      </ul>
+      {% if app.user %}
+      <a href="{{ path('app_logout') }}" class="btn btn-outline-danger" >Déconnexion</a>
+      {% else %}
+      <a href="{{ path('app_register') }}" class="btn btn-outline-info me-3" >Inscription</a>
+      <a href="{{ path('app_login') }}" class="btn btn-outline-light" >Connexion</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+        {% block body %}{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </body>
+</html>
